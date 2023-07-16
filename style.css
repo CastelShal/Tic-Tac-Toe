@@ -1,3 +1,32 @@
 h1{
     text-align: center;
 }
+
+#playarea{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: Helvetica, 'sans-serif'
+}
+
+#playarea > .cell:nth-child(n + 4){
+    border-top: 2px black solid;
+}
+
+#playarea > .cell:nth-child(n+2){
+    border-left: 2px black solid;
+}
+
+#playarea > .cell:nth-child(4),#playarea > .cell:nth-child(7){
+    border-left: 0px;
+}
