@@ -1,6 +1,6 @@
 const playarea = document.getElementById("playarea");
 
-const g = (function(){
+const gameBoard = (function(){
     const board = [[1,1,1],[1,1,1],[1,1,1]];
     const cells = [...playarea.querySelectorAll(".cell")];
     const notice = document.querySelector("h1")
@@ -15,10 +15,10 @@ const g = (function(){
         let mark = 0;
         
         for(let i = 0; i < 3; i++){
-            mark = g.board[i][0];
+            mark = gameBoard.board[i][0];
             reps = 0;
             for(let j = 0; j < 3;  j++){
-                if( g.board[i][j] == mark ){
+                if( gameBoard.board[i][j] == mark ){
                     reps++;
                 }
             }
@@ -28,10 +28,10 @@ const g = (function(){
         }
 
         for(let i = 0; i < 3; i++){
-            mark = g.board[0][i];
+            mark = gameBoard.board[0][i];
             reps = 0;
             for(let j = 0; j < 3;  j++){
-                if( g.board[j][i] == mark ){
+                if( gameBoard.board[j][i] == mark ){
                     reps++;
                 }
             }
@@ -40,10 +40,10 @@ const g = (function(){
             }
         }
 
-        mark = g.board[0][0];
+        mark = gameBoard.board[0][0];
         reps = 0;
         for(let i = 0; i < 3; i++){
-            if( g.board[i][i] == mark ){
+            if( gameBoard.board[i][i] == mark ){
                 reps++;
             }
             }
@@ -51,10 +51,10 @@ const g = (function(){
             return mark;
         }
 
-        mark = g.board[0][2];
+        mark = gameBoard.board[0][2];
         reps = 0;
         for(let i = 0; i < 3; i++){
-            if( g.board[i][Math.abs(i-2)] == mark ){
+            if( gameBoard.board[i][Math.abs(i-2)] == mark ){
                 console.log("Checking " + i + " and " + Math.abs(i-2) );
                 reps++;
             }
@@ -66,7 +66,7 @@ const g = (function(){
 
     }
 
-    function pm(posx, posy, mark){
+    function placeMark(posx, posy, mark){
         mark = mark.toUpperCase();
         if(this.board[posx][posy] != 1){
             return "Invalid Move";
@@ -81,7 +81,7 @@ const g = (function(){
         }
     }
 
-    return {board, cells, pm, clearBoard};
+    return {board, cells, placeMark, clearBoard};
 })();
 
 const playerController = (function(){
@@ -93,11 +93,11 @@ const playerController = (function(){
         px = Math.floor(index / 3);
         py = index % 3;
         console.log({px, py});
-        g.pm(px, py, mark);
+        gameBoard.placeMark(px, py, mark);
         mark = (mark == "O" ? "X" : "O");
     }
 
     return {playMove}
 })();
 
-g.cells.forEach(cell => cell.onclick = playerController.playMove.bind(cell, cell.getAttribute('data-id')));
+gameBoard.cells.forEach(cell => cell.onclick = playerController.playMove.bind(cell, cell.getAttribute('data-id')));
