@@ -4,21 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <!-- <script src="index.js" defer></script> -->
+    <script src="index.js" defer></script>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
-    <h1>Tic-Tac-Toe</h1>
-    <div id="playarea">
-        <div class="cell" data-id="0"></div>
-        <div class="cell" data-id="1"></div>
-        <div class="cell" data-id="2"></div>
-        <div class="cell" data-id="3"></div>
-        <div class="cell" data-id="4"></div>
-        <div class="cell" data-id="5"></div>
-        <div class="cell" data-id="6"></div>
-        <div class="cell" data-id="7"></div>
-        <div class="cell" data-id="8"></div>
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+    </header>
+    <div class="gamebar">
+        <div class="playbar">
+            <div class="score" data-id="1">
+                <span>X</span>
+                <span class="msg"></span>
+            </div>
+            <button id="reset">
+                Reset
+            </button>
+
+            <div class="score" data-id="2">
+                <span>O</span>
+                <span class="msg"></span>
+            </div>
+        </div>
+        <div class="start-bar">
+            <div id="grid-sel">
+                <span>Cells:</span>
+                <input type="range" min="3" max="11" step="2" id="num">
+                <label for="num" value="3">3</label>
+            </div>
+            <div id="play-wrap"><button id="play" class="center">Play</button></div>
+        </div>
+
+    </div>
+    <div class="allow-flex">
+        <div id="playarea">
+        </div>
     </div>
 </body>
 </html>
