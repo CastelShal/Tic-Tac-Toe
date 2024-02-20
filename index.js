@@ -115,7 +115,7 @@ const gameBoard = (function(){
     function placeMark(posx, posy, mark){
         mark = mark.toUpperCase();
         if(this.board[posx][posy] != 1){
-            return "Invalid Move";
+            return false;
         }
         else if(mark == "O" || mark == "X"){
             this.board[posx][posy] = mark;
@@ -126,6 +126,7 @@ const gameBoard = (function(){
                 playerController.gameOver(winner)
             }
         }
+        return true;
     }
 
     return {board, gsize, initBoard, placeMark, clearBoard};
@@ -155,8 +156,9 @@ const playerController = (function(){
         if(lock) {  return  }
         px = Math.floor(index / gameBoard.gsize);
         py = index % gameBoard.gsize;
-        console.log(px,py,mark);
-        gameBoard.placeMark(px, py, mark);
+        //console.log(px,py,mark);
+        const valid = gameBoard.placeMark(px, py, mark);
+        if(!valid) return;
         num_plays++;
         
         if(num_plays >= (gameBoard.gsize * gameBoard.gsize)){
