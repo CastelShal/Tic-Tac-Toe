@@ -212,6 +212,7 @@ const playerController = (function () {
 
     return { getMove, playMove, gameOver, setLock, indicate }
 })();
+
 let logNow = false;
 const cpuPlayer = (function () {
     // requires access to board state
@@ -228,7 +229,7 @@ const cpuPlayer = (function () {
         // If Maximizer has won the game 
         // return his/her evaluated score 
         if (score == 10) {
-            if (logNow) console.log("--".repeat(depth), { x, y, depth, score: (score -X depth) }, "CPU win")
+            if (logNow) console.log("--".repeat(depth), { x, y, depth, score: (score - depth) }, "CPU win")
             return 10 - depth;
         }
 
@@ -293,6 +294,7 @@ const cpuPlayer = (function () {
         }
 
     }
+
 
     function findBestMove() {
         let row, col;
