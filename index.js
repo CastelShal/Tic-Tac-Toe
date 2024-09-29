@@ -214,13 +214,10 @@ const playerController = (function () {
 })();
 
 let logNow = false;
+
 const cpuPlayer = (function () {
     // requires access to board state
     function minimax(x, y, depth, isMax) {
-        if (logNow) {
-            // console.log(gameBoard.board[0], gameBoard.board[1], gameBoard.board[2]);
-            console.log(`Number of plays done is ${depth} + ${playerController.getMove()} = ${depth + playerController.getMove() + 1}`);
-        }
         let score;
         let winMark = gameBoard.checkWinner(x, y);
         if (winMark == "X") { score = -10 };
@@ -229,25 +226,18 @@ const cpuPlayer = (function () {
         // If Maximizer has won the game 
         // return his/her evaluated score 
         if (score == 10) {
-            if (logNow) console.log("--".repeat(depth), { x, y, depth, score: (score - depth) }, "CPU win")
             return 10 - depth;
         }
 
         // If Minimizer has won the game 
         // return his/her evaluated score 
         if (score == -10) {
-            if (logNow) console.log("--".repeat(depth), { x, y, depth, score: (depth - score) }, "Player win")
             return depth - 10;
         }
         // If there are no more moves and 
         // no winner then it is a tie 
         if (playerController.getMove() + depth + 1 >= gameBoard.gsize * gameBoard.gsize) {
-            if (logNow) console.log("Draw")
             return 0;
-        }
-        if (logNow) {
-            // console.log(gameBoard.board[0], gameBoard.board[1], gameBoard.board[2]);
-            console.log("--".repeat(depth), { x, y, depth, isMax, score });
         }
         // If this maximizer's move 
         if (isMax) {
